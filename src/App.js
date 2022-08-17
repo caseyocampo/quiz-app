@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
+import lemonBlob from "./assets/images/lemon_blob.svg"
+import babyBlueBlob from "./assets/images/baby_blue_blob.svg"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main>
+      <img src={lemonBlob} alt="decorative lemon colored blob fixed to the top right of the screen" className="lemon-blob" />
+      <img src={babyBlueBlob} alt="decorative lemon colored blob fixed to the top right of the screen" className="baby-blue-blob" />
+      <div className="start-page">
+        <h1>Quizzical</h1>
+        <p>Quiz yourself on some good ol' Trivia!</p>
+        <button className="button-primary">Start quiz</button>
+      </div>
+    </main>
+  )
 }
 
-export default App;
+export default App
