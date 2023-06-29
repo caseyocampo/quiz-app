@@ -1,3 +1,13 @@
+:root {
+  --bg: #f5f7fb;
+  --main: #293264;
+  --green: #94d7a2;
+  --red: #f8bcbc;
+  --blueLight: #d6dbf5;
+  --blueDark: #4d5b9e;
+  --white: #f5f7fb;
+}
+
 html,
 body {
   font-family: "Karla", sans-serif;
@@ -13,16 +23,6 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-:root {
-  --bg: #f5f7fb;
-  --main: #293264;
-  --green: #94d7a2;
-  --red: #f8bcbc;
-  --blueLight: #d6dbf5;
-  --blueDark: #4d5b9e;
-  --white: #f5f7fb;
 }
 
 h1,
