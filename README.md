@@ -1,5 +1,7 @@
 # Quiz App Solo Project for Scrimba
 
+Run project: `npm start`
+
 A React solo project from [Scrimba's Frontend Developer Career Path](https://scrimba.com/learn/frontend).
 
 Tools used:
