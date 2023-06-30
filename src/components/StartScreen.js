@@ -64,6 +64,9 @@ export default function StartScreen() {
             Back to start page
           </button>
           <h1 className="title">{questions.results[0].category} Questions</h1>
+          {questions.results.map((question, index) => (
+            <p key={`question-${index}`}>{question.question}</p>
+          ))}
           <h2>{questions.results[0].question}</h2>
           <fieldset>
             <legend className="sr-only">Select a maintenance drone:</legend>
