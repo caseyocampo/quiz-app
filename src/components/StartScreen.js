@@ -2,19 +2,7 @@ import { React, useState, useEffect } from "react"
 import "../assets/css/index.css"
 import lemonBlob from "../assets/images/lemon_blob.svg"
 import babyBlueBlob from "../assets/images/baby_blue_blob.svg"
-import { encode } from "html-entities"
-
-encode("< > \" ' & © ∆")
-// -> '&lt; &gt; &quot; &apos; &amp; © ∆'
-
-encode("< ©", { mode: "nonAsciiPrintable" })
-// -> '&lt; &copy;'
-
-encode("< ©", { mode: "nonAsciiPrintable", level: "xml" })
-// -> '&lt; &#169;'
-
-encode("< > \" ' & ©", { mode: "nonAsciiPrintableOnly", level: "xml" })
-// -> '< > " \' & &#169;'
+import { decode } from "html-entities"
 
 export default function StartScreen() {
   const [isStartScreen, setIsStartScreen] = useState(false)
@@ -60,37 +48,37 @@ export default function StartScreen() {
         <div className="questions-container">
           <img src={lemonBlob} alt="" className="yellow-blob" />
           <img src={babyBlueBlob} alt="" className="blue-blob" />
-          <button className="button-primary" onClick={handleClick}>
+          {/* <button className="button-primary" onClick={handleClick}>
             Back to start page
-          </button>
+          </button> */}
           <h1 className="title">{questions.results[0].category} Questions</h1>
           {questions.results.map((question, index) => (
-            <p key={`question-${index}`}>{question.question}</p>
+            <div>
+              <h2 key={`question-${index}`}>{decode(question.question)}</h2>
+              <fieldset>
+                <legend className="sr-only">Select a maintenance drone:</legend>
+                <input type="radio" id="one" name="quiz" value="huey" />
+                <label htmlFor="one" className="button">
+                  {question.correct_answer}
+                </label>
+                <input type="radio" id="two" name="quiz" value="dewey" />
+                <label htmlFor="two" className="button">
+                  {question.incorrect_answers[0]}
+                </label>
+
+                <input type="radio" id="three" name="quiz" value="louie" />
+                <label htmlFor="three" className="button">
+                  {question.incorrect_answers[1]}
+                </label>
+
+                <input type="radio" id="four" name="quiz" value="louie" />
+                <label htmlFor="four" className="button">
+                  {question.incorrect_answers[2]}
+                </label>
+                <hr className="question-divider" />
+              </fieldset>
+            </div>
           ))}
-          <h2>{questions.results[0].question}</h2>
-          <fieldset>
-            <legend className="sr-only">Select a maintenance drone:</legend>
-            <input type="radio" id="one" name="quiz" value="huey" />
-            <label htmlFor="one" className="button">
-              {questions.results[0].correct_answer}
-            </label>
-
-            <input type="radio" id="two" name="quiz" value="dewey" />
-            <label htmlFor="two" className="button">
-              {questions.results[0].incorrect_answers[0]}
-            </label>
-
-            <input type="radio" id="three" name="quiz" value="louie" />
-            <label htmlFor="three" className="button">
-              {questions.results[0].incorrect_answers[1]}
-            </label>
-
-            <input type="radio" id="four" name="quiz" value="louie" />
-            <label htmlFor="four" className="button">
-              {questions.results[0].incorrect_answers[2]}
-            </label>
-          </fieldset>
-          <hr className="question-divider" />
         </div>
       )}
     </section>
