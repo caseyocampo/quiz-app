@@ -6,6 +6,16 @@
   --blueLight: #d6dbf5;
   --blueDark: #4d5b9e;
   --white: #f5f7fb;
+  --border-radius: 0.5em;
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 html,
@@ -36,6 +46,11 @@ h1 {
   margin-bottom: 0.25em;
 }
 
+.title {
+  font-size: 3rem;
+  margin-bottom: 0.25em;
+}
+
 h1 + p {
   font-size: 1.25rem;
   text-align: center;
@@ -50,4 +65,8 @@ h2 {
 
 button:hover {
   cursor: pointer;
+}
+
+fieldset {
+  border: none;
 }

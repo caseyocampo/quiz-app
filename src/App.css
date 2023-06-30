@@ -7,6 +7,7 @@
 .blue-blob {
   position: fixed;
   bottom: 0;
+  left: 0;
 }
 
 .start-page {
@@ -21,7 +22,7 @@
 .button-primary {
   background: var(--blueDark);
   border: none;
-  border-radius: 0.5em;
+  border-radius: var(--border-radius);
   color: var(--white);
   font-size: 2rem;
   padding: 0.75em 2.5em;
@@ -29,4 +30,27 @@
 
 .button-text {
   font-weight: 600;
+}
+
+label.button {
+  border: 1.5px solid var(--blueDark);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  color: var(--blueDark);
+  display: inline-block;
+  padding: 0.5em 1em;
+}
+
+input[type="radio"] {
+  margin: 0 1em;
+}
+
+.question-divider {
+  border: 1px solid #dbdef0;
+  margin: 1em 0;
+}
+
+.questions-container {
+  margin: 3em auto;
+  max-width: 900px;
 }

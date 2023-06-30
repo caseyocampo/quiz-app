@@ -1,8 +1,7 @@
 import "./App.css"
-
 import StartScreen from "./components/StartScreen"
 
-function App() {
+function App(props) {
   return (
     <main>
       <StartScreen />
