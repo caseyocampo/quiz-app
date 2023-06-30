@@ -63,10 +63,6 @@ h2 {
   font-weight: bold;
 }
 
-button:hover {
-  cursor: pointer;
-}
-
 fieldset {
   border: none;
 }

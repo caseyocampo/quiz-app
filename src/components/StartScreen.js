@@ -48,37 +48,45 @@ export default function StartScreen() {
         <div className="questions-container">
           <img src={lemonBlob} alt="" className="yellow-blob" />
           <img src={babyBlueBlob} alt="" className="blue-blob" />
-          {/* <button className="button-primary" onClick={handleClick}>
-            Back to start page
-          </button> */}
+
           <h1 className="title">{questions.results[0].category} Questions</h1>
           {questions.results.map((question, index) => (
-            <div>
+            <div key={`question-container-${index}`}>
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
               <fieldset>
                 <legend className="sr-only">Select a maintenance drone:</legend>
-                <input type="radio" id="one" name="quiz" value="huey" />
-                <label htmlFor="one" className="button">
-                  {question.correct_answer}
+                <input type="radio" id={`one-${index}`} name="quiz" value="huey" />
+                <label htmlFor={`one-${index}`} className="button">
+                  {decode(question.correct_answer)}
                 </label>
-                <input type="radio" id="two" name="quiz" value="dewey" />
-                <label htmlFor="two" className="button">
-                  {question.incorrect_answers[0]}
-                </label>
-
-                <input type="radio" id="three" name="quiz" value="louie" />
-                <label htmlFor="three" className="button">
-                  {question.incorrect_answers[1]}
+                <input type="radio" id={`two-${index}`} name="quiz" value="dewey" />
+                <label htmlFor={`two-${index}`} className="button">
+                  {decode(question.incorrect_answers[0])}
                 </label>
 
-                <input type="radio" id="four" name="quiz" value="louie" />
-                <label htmlFor="four" className="button">
-                  {question.incorrect_answers[2]}
+                <input type="radio" id={`three-${index}`} name="quiz" value="louie" />
+                <label htmlFor={`three-${index}`} className="button">
+                  {decode(question.incorrect_answers[1])}
+                </label>
+
+                <input type="radio" id={`four-${index}`} name="quiz" value="louie" />
+                <label htmlFor={`four-${index}`} className="button">
+                  {decode(question.incorrect_answers[2])}
                 </label>
                 <hr className="question-divider" />
               </fieldset>
             </div>
           ))}
+
+          <div className="button-container">
+            <button className="button-secondary" onClick={handleClick}>
+              Back to start page
+            </button>
+
+            <button className="button-primary" onClick={handleClick}>
+              Check answers
+            </button>
+          </div>
         </div>
       )}
     </section>
