@@ -67,9 +67,14 @@ input[type="radio"] {
   margin: 0 1em;
 }
 
-label.correct-answer {
+label.answer-selected {
   background: var(--blueLight);
   border: 1.5px solid var(--blueLight);
+}
+
+label.correct-answer {
+  background: var(--green);
+  border: 1.5px solid var(--green);
 }
 
 .question-divider {
