@@ -12,13 +12,13 @@ export default function StartScreen() {
     incorrect_answers: "",
     category: "",
   })
-  const [isAnswersChecked, setIsAnswersChecked] = useState(false)
-  const [randomAnswers, setRandomAnswers] = useState([])
+  //   const [isAnswersChecked, setIsAnswersChecked] = useState(false)
+  //   const [randomAnswers, setRandomAnswers] = useState([])
 
-  function getRandomItem(set) {
-    let items = Array.from(set)
-    return items[Math.floor(Math.random() * items.length)]
-  }
+  //   function getRandomItem(set) {
+  //     let items = Array.from(set)
+  //     return items[Math.floor(Math.random() * items.length)]
+  //   }
 
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
