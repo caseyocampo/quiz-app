@@ -57,9 +57,9 @@ export default function StartScreen() {
     // shuffleAnswers()
   }
 
-  function handleCheckAnswers() {
-    setIsAnswersChecked(prev => !prev)
-  }
+  //   function handleCheckAnswers() {
+  //     setIsAnswersChecked(prev => !prev)
+  //   }
 
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple")
