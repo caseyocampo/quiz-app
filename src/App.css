@@ -84,8 +84,9 @@ input[type='radio']:checked + label {
   background: var(--blueLight);
   border: 1.5px solid var(--blueLight);
 }
+
 .question-divider {
-  border: 1.5px solid #dbdef0;
+  border: 0.5px solid #dbdef0;
   margin: 1em 0;
 }
 

@@ -100,6 +100,7 @@ export default function StartScreen() {
                   </span>
                 ))}
               </fieldset>
+              <hr className="question-divider" />
             </div>
           ))}
 
