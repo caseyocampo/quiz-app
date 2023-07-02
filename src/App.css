@@ -55,6 +55,7 @@ button:hover {
 }
 
 label.button {
+  background-color: var(--bg);
   border: 1.5px solid var(--blueDark);
   border-radius: var(--border-radius);
   font-weight: 600;
@@ -91,4 +92,17 @@ input[type='radio']:checked + label {
 .questions-container {
   margin: 3em auto;
   max-width: 900px;
+}
+
+.blob {
+  z-index: 10;
+}
+
+h2,
+span,
+label,
+input,
+button {
+  position: relative;
+  z-index: 100;
 }

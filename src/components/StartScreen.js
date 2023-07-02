@@ -29,10 +29,8 @@ export default function StartScreen() {
     setIsStartScreen((prev) => !prev)
   }
 
-  function handleCheckAnswers(a) {
-    if (a) {
-      return 'correct-answer'
-    }
+  function handleCheckAnswers() {
+    setIsAnswersChecked((prev) => !prev)
   }
 
   function shuffle(a, b) {
@@ -54,8 +52,8 @@ export default function StartScreen() {
     <section>
       {!isStartScreen && (
         <div>
-          <img src={lemonBlob} alt="" className="yellow-blob" />
-          <img src={babyBlueBlob} alt="" className="blue-blob" />
+          <img src={lemonBlob} alt="" className="blob yellow-blob" />
+          <img src={babyBlueBlob} alt="" className="blob blue-blob" />
           <div className="start-page">
             <h1>Quizzical - a Solo Scrimba Project</h1>
             <p style={{ maxWidth: '500px', textAlign: 'left' }}>
