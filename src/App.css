@@ -64,7 +64,7 @@ label.button {
 }
 
 input[type='radio'] {
-  margin: 0 1em;
+  margin-right: 1em;
 }
 
 label.answer-selected {

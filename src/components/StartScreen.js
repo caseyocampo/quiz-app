@@ -12,6 +12,8 @@ export default function StartScreen() {
     incorrect_answers: '',
     category: '',
   })
+  const [isAnswersChecked, setIsAnswersChecked] = useState(false)
+
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
       .then((res) => res.json())
@@ -38,10 +40,12 @@ export default function StartScreen() {
   }
 
   function getUniqueKey(string) {
-    // let string = "  casey ocampo  "
     string = string.replace(/\s+/g, '')
-    console.log(string)
     return string
+  }
+
+  function handleCheckAnswers() {
+    setIsAnswersChecked((prev) => !prev)
   }
 
   return (
@@ -53,8 +57,9 @@ export default function StartScreen() {
           <div className="start-page">
             <h1>Quizzical - a Solo Scrimba Project</h1>
             <p style={{ maxWidth: '500px', textAlign: 'left' }}>
-              As a student of the Scrimba Front End Development Career Path, we were given a Figma file and set of
-              instructions to complete this project.
+              To continue my <a href="https://scrimba.com/learn/frontend">React</a> education, I've joined the Scrimba Front
+              End Development Career Path. We were given a Figma file and set of instructions to complete this project. This
+              is the finished project. Enjoy!
             </p>
             <button className="button-primary" onClick={handleClick}>
               Start quiz
@@ -83,7 +88,7 @@ export default function StartScreen() {
                     name={`${getUniqueKey(decode(question.correct_answer))}`}
                     value="huey"
                   />
-                  <label htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`} className="button">
+                  <label htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`} className={`button`}>
                     {decode(answer)}
                   </label>
                 </fieldset>
@@ -94,13 +99,13 @@ export default function StartScreen() {
           ))}
 
           <div className="button-container">
-            <button className="button-secondary" onClick={handleClick}>
+            {/* <button className="button-secondary" onClick={handleClick}>
               Back to start page
-            </button>
-
-            {/* <button className="button-primary" onClick={handleCheckAnswers}>
-              Check answers
             </button> */}
+
+            <button className="button-primary" onClick={handleCheckAnswers}>
+              Check answers
+            </button>
           </div>
         </div>
       )}

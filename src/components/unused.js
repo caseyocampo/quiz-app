@@ -1,5 +1,3 @@
-//   const [isAnswersChecked, setIsAnswersChecked] = useState(false)
-
 //   function shuffleAnswers() {
 //     const correctAnswer = questions.results[0].correct_answer
 //     let incorrectAnswers = questions.results[0].incorrect_answers
@@ -38,10 +36,6 @@
 //   }
 
 // shuffleAnswers()
-
-//   function handleCheckAnswers() {
-//     setIsAnswersChecked(prev => !prev)
-//   }
 
 {
   /* {decode(question.correct_answer)} */

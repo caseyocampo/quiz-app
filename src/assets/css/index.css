@@ -20,7 +20,7 @@
 
 html,
 body {
-  font-family: "Karla", sans-serif;
+  font-family: 'Karla', sans-serif;
 }
 
 body {
@@ -32,7 +32,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 h1,
@@ -66,4 +66,5 @@ h2 {
 fieldset {
   border: none;
   display: inline-block;
+  padding-left: 0;
 }
