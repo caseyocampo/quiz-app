@@ -93,7 +93,10 @@ export default function StartScreen() {
                     />
                     <label
                       htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
-                      className={`button ${isAnswersChecked && `wrong-answer`}`}
+                      className={`button ${
+                        isAnswersChecked &&
+                        (decode(question.correct_answer) == decode(answer) ? 'correct-answer' : 'incorrect-answer')
+                      }`}
                     >
                       {decode(answer)}
                     </label>
