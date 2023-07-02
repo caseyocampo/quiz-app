@@ -104,9 +104,9 @@ export default function StartScreen() {
               Back to start page
             </button>
 
-            <button className="button-primary" onClick={handleCheckAnswers}>
+            {/* <button className="button-primary" onClick={handleCheckAnswers}>
               Check answers
-            </button>
+            </button> */}
           </div>
         </div>
       )}
