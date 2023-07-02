@@ -80,7 +80,6 @@ label.correct-answer {
 input[type='radio']:checked + label {
   background: var(--blueLight);
   border: 1.5px solid var(--blueLight);
-  font-weight: bold;
 }
 .question-divider {
   border: 1.5px solid #dbdef0;
