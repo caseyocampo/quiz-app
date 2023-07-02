@@ -66,5 +66,5 @@ h2 {
 fieldset {
   border: none;
   display: inline-block;
-  padding-left: 0;
+  padding: 0;
 }

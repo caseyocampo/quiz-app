@@ -25,6 +25,16 @@ export default function StartScreen() {
       })
   }, [])
 
+  function handleClick() {
+    setIsStartScreen((prev) => !prev)
+  }
+
+  function handleCheckAnswers(a) {
+    if (a) {
+      return 'correct-answer'
+    }
+  }
+
   function shuffle(a, b) {
     let c = [a]
     b.push(c)
@@ -35,17 +45,9 @@ export default function StartScreen() {
     return b
   }
 
-  function handleClick() {
-    setIsStartScreen((prev) => !prev)
-  }
-
   function getUniqueKey(string) {
     string = string.replace(/\s+/g, '')
     return string
-  }
-
-  function handleCheckAnswers() {
-    setIsAnswersChecked((prev) => !prev)
   }
 
   return (
@@ -57,9 +59,9 @@ export default function StartScreen() {
           <div className="start-page">
             <h1>Quizzical - a Solo Scrimba Project</h1>
             <p style={{ maxWidth: '500px', textAlign: 'left' }}>
-              To continue my <a href="https://scrimba.com/learn/frontend">React</a> education, I've joined the Scrimba Front
-              End Development Career Path. We were given a Figma file and set of instructions to complete this project. This
-              is the finished project. Enjoy!
+              To continue my <a href="https://scrimba.com/learn/frontend">React</a> education, I've joined the Scrimba
+              Front End Development Career Path. We were given a Figma file and set of instructions to complete this
+              project. This is the finished project. Enjoy!
             </p>
             <button className="button-primary" onClick={handleClick}>
               Start quiz
@@ -77,31 +79,36 @@ export default function StartScreen() {
             <div key={`question-container-${index}`} id={`question-container-${index}`}>
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
 
-              {shuffle(question.correct_answer, question.incorrect_answers).map((answer, index) => (
-                <fieldset
-                  key={`${getUniqueKey(decode(question.correct_answer))}-answer-container-${index}`}
-                  id={`${getUniqueKey(decode(question.correct_answer))}-answer-container-${index}`}
-                >
-                  <input
-                    type="radio"
-                    id={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
-                    name={`${getUniqueKey(decode(question.correct_answer))}`}
-                    value="huey"
-                  />
-                  <label htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`} className={`button`}>
-                    {decode(answer)}
-                  </label>
-                </fieldset>
-              ))}
-
-              <br />
+              <fieldset>
+                <legend className="sr-only">Quiz question</legend>
+                {shuffle(question.correct_answer, question.incorrect_answers).map((answer, index) => (
+                  <span
+                    style={{ display: 'inline-block' }}
+                    key={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}
+                    id={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}
+                  >
+                    <input
+                      type="radio"
+                      id={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
+                      name={`${getUniqueKey(decode(question.correct_answer))}`}
+                      value={decode(question.correct_answer)}
+                    />
+                    <label
+                      htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
+                      className={`button ${isAnswersChecked && `wrong-answer`}`}
+                    >
+                      {decode(answer)}
+                    </label>
+                  </span>
+                ))}
+              </fieldset>
             </div>
           ))}
 
           <div className="button-container">
-            {/* <button className="button-secondary" onClick={handleClick}>
+            <button className="button-secondary" onClick={handleClick}>
               Back to start page
-            </button> */}
+            </button>
 
             <button className="button-primary" onClick={handleCheckAnswers}>
               Check answers

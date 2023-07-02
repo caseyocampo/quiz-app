@@ -61,6 +61,8 @@ label.button {
   color: var(--blueDark);
   display: inline-block;
   padding: 0.5em 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 
 input[type='radio'] {
