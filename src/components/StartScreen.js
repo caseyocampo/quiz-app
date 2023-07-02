@@ -13,15 +13,24 @@ export default function StartScreen() {
     category: "",
   })
   //   const [isAnswersChecked, setIsAnswersChecked] = useState(false)
-  //   const [randomAnswers, setRandomAnswers] = useState([])
-
-  function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
+  let allAnswers = []
+  function shuffle(a, b) {
+    let c = [a]
+    b.push(c)
+    for (let i = b.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
-      ;[a[i], a[j]] = [a[j], a[i]]
+      ;[b[i], b[j]] = [b[j], b[i]]
     }
-    return a
+    return b
   }
+
+  //   function shuffle(a) {
+  //     for (let i = a.length - 1; i > 0; i--) {
+  //       const j = Math.floor(Math.random() * (i + 1))
+  //       ;[a[i], a[j]] = [a[j], a[i]]
+  //     }
+  //     return a
+  //   }
 
   function handleClick() {
     setIsStartScreen(prev => !prev)
@@ -67,13 +76,24 @@ export default function StartScreen() {
           {questions.results.map((question, index) => (
             <div key={`question-container-${index}`}>
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
-              {/* {question.incorrect_answers} */}
+              {question.correct_answer}
               <br />
-              {shuffle(question.incorrect_answers.map(answer => decode(`${answer}, `)))}
-              <br />
-              {question.incorrect_answers.map(answer => decode(`${answer}, `))}
-              {/* {`${decode(question.correct_answer)} ${decode(question.incorrect_answers)}`} */}
+              {/* code below works */}
+              {(allAnswers = shuffle(question.correct_answer, question.incorrect_answers))}
+              {/* code above works */}
 
+              <br />
+              {allAnswers.map(answer => (
+                <label htmlFor="" className="button">
+                  {answer}
+                </label>
+              ))}
+              {/* {shuffle(question.correct_answer, question.incorrect_answers).map(answer => (
+                <label htmlFor="" className="button">
+                  {answer}
+                </label>
+              ))}
+              <br /> */}
               {/* <fieldset>
                 <legend className="sr-only">Quiz question:</legend>
                 <input type="radio" id={`one-${index}`} name="quiz" value="huey" />

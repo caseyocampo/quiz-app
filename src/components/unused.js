@@ -1,3 +1,5 @@
+//   const [randomAnswers, setRandomAnswers] = useState([])
+
 //   function shuffleAnswers() {
 //     const correctAnswer = questions.results[0].correct_answer
 //     let incorrectAnswers = questions.results[0].incorrect_answers
