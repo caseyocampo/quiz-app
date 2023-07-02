@@ -22,7 +22,7 @@
 .button-container {
   display: inline-flex;
   justify-content: center;
-  margin-top: 1.5em;
+  margin-top: 5em;
   width: 100%;
 }
 
@@ -63,7 +63,7 @@ label.button {
   padding: 0.5em 1em;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   margin: 0 1em;
 }
 
@@ -77,8 +77,13 @@ label.correct-answer {
   border: 1.5px solid var(--green);
 }
 
+input[type='radio']:checked + label {
+  background: var(--blueLight);
+  border: 1.5px solid var(--blueLight);
+  font-weight: bold;
+}
 .question-divider {
-  border: 1px solid #dbdef0;
+  border: 1.5px solid #dbdef0;
   margin: 1em 0;
 }
 

@@ -1,23 +1,21 @@
-import { React, useState, useEffect } from "react"
-import "../assets/css/index.css"
-import lemonBlob from "../assets/images/lemon_blob.svg"
-import babyBlueBlob from "../assets/images/baby_blue_blob.svg"
-import { decode } from "html-entities"
+import { React, useState, useEffect } from 'react'
+import '../assets/css/index.css'
+import lemonBlob from '../assets/images/lemon_blob.svg'
+import babyBlueBlob from '../assets/images/baby_blue_blob.svg'
+import { decode } from 'html-entities'
 
 export default function StartScreen() {
   const [isStartScreen, setIsStartScreen] = useState(false)
   const [questions, setQuestions] = useState({
-    question: "",
-    correct_answer: "",
-    incorrect_answers: "",
-    category: "",
+    question: '',
+    correct_answer: '',
+    incorrect_answers: '',
+    category: '',
   })
-  const [randomAnswers, setRandomAnswers] = useState([])
-  let allAnswers = []
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple")
-      .then(res => res.json())
-      .then(data => {
+    fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
+      .then((res) => res.json())
+      .then((data) => {
         if (data.results) {
           setQuestions(data)
         }
@@ -36,7 +34,14 @@ export default function StartScreen() {
   }
 
   function handleClick() {
-    setIsStartScreen(prev => !prev)
+    setIsStartScreen((prev) => !prev)
+  }
+
+  function getUniqueKey(string) {
+    // let string = "  casey ocampo  "
+    string = string.replace(/\s+/g, '')
+    console.log(string)
+    return string
   }
 
   return (
@@ -46,8 +51,11 @@ export default function StartScreen() {
           <img src={lemonBlob} alt="" className="yellow-blob" />
           <img src={babyBlueBlob} alt="" className="blue-blob" />
           <div className="start-page">
-            <h1>Quizzical - a Scrimba Project</h1>
-            <p>Quiz yourself on some good ol' Trivia!</p>
+            <h1>Quizzical - a Solo Scrimba Project</h1>
+            <p style={{ maxWidth: '500px', textAlign: 'left' }}>
+              As a student of the Scrimba Front End Development Career Path, we were given a Figma file and set of
+              instructions to complete this project.
+            </p>
             <button className="button-primary" onClick={handleClick}>
               Start quiz
             </button>
@@ -61,58 +69,27 @@ export default function StartScreen() {
 
           <h1 className="title">{questions.results[0].category} Questions</h1>
           {questions.results.map((question, index) => (
-            <div key={`question-container-${index}`}>
+            <div key={`question-container-${index}`} id={`question-container-${index}`}>
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
-              {/* {decode(question.correct_answer)} */}
-              {/* code below works */}
-              {/* {(allAnswers = shuffle(question.correct_answer, question.incorrect_answers))} */}
-              {/* code above works */}
-              {
-                (allAnswers = shuffle(question.correct_answer, question.incorrect_answers).map(answer => (
-                  <span>
-                    <input type="radio" id={`one-${index}`} name="quiz" value="huey" />
-                    <label htmlFor="" className="button">
-                      {answer}
-                    </label>
-                  </span>
-                )))
-              }
+
+              {shuffle(question.correct_answer, question.incorrect_answers).map((answer, index) => (
+                <fieldset
+                  key={`${getUniqueKey(decode(question.correct_answer))}-answer-container-${index}`}
+                  id={`${getUniqueKey(decode(question.correct_answer))}-answer-container-${index}`}
+                >
+                  <input
+                    type="radio"
+                    id={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
+                    name={`${getUniqueKey(decode(question.correct_answer))}`}
+                    value="huey"
+                  />
+                  <label htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`} className="button">
+                    {decode(answer)}
+                  </label>
+                </fieldset>
+              ))}
 
               <br />
-              {/* {allAnswers.map(answer => (
-                <label key={`label-${index++}`} htmlFor="" className="button">
-                  {answer}
-                </label>
-              ))} */}
-
-              {/* {shuffle(question.correct_answer, question.incorrect_answers).map(answer => (
-                <label htmlFor="" className="button">
-                  {answer}
-                </label>
-              ))}
-              <br /> */}
-              {/* <fieldset>
-                <legend className="sr-only">Quiz question:</legend>
-                <input type="radio" id={`one-${index}`} name="quiz" value="huey" />
-                <label htmlFor={`one-${index}`} className={`button ${isAnswersChecked && `correct-answer`}`}>
-                  {decode(question.correct_answer)}
-                </label>
-                <input type="radio" id={`two-${index}`} name="quiz" value="dewey" />
-                <label htmlFor={`two-${index}`} className={`button ${isAnswersChecked && `wrong-answer`}`}>
-                  {decode(question.incorrect_answers[0])}
-                </label>
-
-                <input type="radio" id={`three-${index}`} name="quiz" value="louie" />
-                <label htmlFor={`three-${index}`} className="button">
-                  {decode(question.incorrect_answers[1])}
-                </label>
-
-                <input type="radio" id={`four-${index}`} name="quiz" value="louie" />
-                <label htmlFor={`four-${index}`} className="button">
-                  {decode(question.incorrect_answers[2])}
-                </label>
-                <hr className="question-divider" />
-              </fieldset> */}
             </div>
           ))}
 
