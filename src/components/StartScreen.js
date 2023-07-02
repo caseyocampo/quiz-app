@@ -12,35 +12,8 @@ export default function StartScreen() {
     incorrect_answers: "",
     category: "",
   })
-  //   const [isAnswersChecked, setIsAnswersChecked] = useState(false)
+  const [randomAnswers, setRandomAnswers] = useState([])
   let allAnswers = []
-  function shuffle(a, b) {
-    let c = [a]
-    b.push(c)
-    for (let i = b.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[b[i], b[j]] = [b[j], b[i]]
-    }
-    return b
-  }
-
-  //   function shuffle(a) {
-  //     for (let i = a.length - 1; i > 0; i--) {
-  //       const j = Math.floor(Math.random() * (i + 1))
-  //       ;[a[i], a[j]] = [a[j], a[i]]
-  //     }
-  //     return a
-  //   }
-
-  function handleClick() {
-    setIsStartScreen(prev => !prev)
-    // shuffleAnswers()
-  }
-
-  //   function handleCheckAnswers() {
-  //     setIsAnswersChecked(prev => !prev)
-  //   }
-
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple")
       .then(res => res.json())
@@ -51,6 +24,20 @@ export default function StartScreen() {
         return { errorCode: data.status }
       })
   }, [])
+
+  function shuffle(a, b) {
+    let c = [a]
+    b.push(c)
+    for (let i = b.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[b[i], b[j]] = [b[j], b[i]]
+    }
+    return b
+  }
+
+  function handleClick() {
+    setIsStartScreen(prev => !prev)
+  }
 
   return (
     <section>
@@ -76,18 +63,28 @@ export default function StartScreen() {
           {questions.results.map((question, index) => (
             <div key={`question-container-${index}`}>
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
-              {question.correct_answer}
-              <br />
+              {/* {decode(question.correct_answer)} */}
               {/* code below works */}
-              {(allAnswers = shuffle(question.correct_answer, question.incorrect_answers))}
+              {/* {(allAnswers = shuffle(question.correct_answer, question.incorrect_answers))} */}
               {/* code above works */}
+              {
+                (allAnswers = shuffle(question.correct_answer, question.incorrect_answers).map(answer => (
+                  <span>
+                    <input type="radio" id={`one-${index}`} name="quiz" value="huey" />
+                    <label htmlFor="" className="button">
+                      {answer}
+                    </label>
+                  </span>
+                )))
+              }
 
               <br />
-              {allAnswers.map(answer => (
-                <label htmlFor="" className="button">
+              {/* {allAnswers.map(answer => (
+                <label key={`label-${index++}`} htmlFor="" className="button">
                   {answer}
                 </label>
-              ))}
+              ))} */}
+
               {/* {shuffle(question.correct_answer, question.incorrect_answers).map(answer => (
                 <label htmlFor="" className="button">
                   {answer}

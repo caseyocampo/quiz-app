@@ -1,4 +1,4 @@
-//   const [randomAnswers, setRandomAnswers] = useState([])
+//   const [isAnswersChecked, setIsAnswersChecked] = useState(false)
 
 //   function shuffleAnswers() {
 //     const correctAnswer = questions.results[0].correct_answer
@@ -27,4 +27,18 @@
 //   function getRandomItem(set) {
 //     let items = Array.from(set)
 //     return items[Math.floor(Math.random() * items.length)]
+//   }
+
+//   function shuffle(a) {
+//     for (let i = a.length - 1; i > 0; i--) {
+//       const j = Math.floor(Math.random() * (i + 1))
+//       ;[a[i], a[j]] = [a[j], a[i]]
+//     }
+//     return a
+//   }
+
+// shuffleAnswers()
+
+//   function handleCheckAnswers() {
+//     setIsAnswersChecked(prev => !prev)
 //   }
