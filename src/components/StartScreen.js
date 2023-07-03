@@ -143,7 +143,7 @@ export default function StartScreen() {
 
           {isAnswersChecked && (
             <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
-              <p>You scored {score} our of 5 correct answers</p>
+              <p>You scored {score} out of 5 correct answers</p>
             </div>
           )}
 
