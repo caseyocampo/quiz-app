@@ -14,8 +14,9 @@ export default function StartScreen() {
     category: '',
   })
 
-  const [isAnswersChecked, setIsAnswersChecked] = useState(false)
+  const [isAnswersChecked, setIsAnswersChecked] = useState('')
   const [isNewQuestion, setIsNewQuestions] = useState(false)
+  const [score, setScore] = useState(0)
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
@@ -45,6 +46,15 @@ export default function StartScreen() {
     setIsNewQuestions((prev) => !prev)
     setIsAnswersChecked(false)
   }
+
+  useEffect(() => {
+    const correctAnswers = document.querySelectorAll('.button.correct-answer.selected.incorrect-answer').length
+    const selectedIncorrectrectAnswers = document.querySelectorAll(
+      'input[type="radio"]:checked + label.selected-wrong-answer'
+    ).length
+    const totalScore = correctAnswers - selectedIncorrectrectAnswers
+    setScore(totalScore)
+  }, [isAnswersChecked])
 
   function getUniqueKey(string) {
     string = string.replace(/\s+/g, '')
@@ -116,10 +126,10 @@ export default function StartScreen() {
                         className={`button ${
                           isAnswersChecked &&
                           (decode(question.correct_answer) == decode(answer)
-                            ? 'correct-answer'
+                            ? 'correct-answer selected'
                             : 'selected-wrong-answer')
                         }
-                            ${isAnswersChecked && 'incorrect-answer'}
+                        ${isAnswersChecked && 'incorrect-answer'}
                             `}
                       >
                         {decode(answer)}
@@ -130,6 +140,12 @@ export default function StartScreen() {
               <hr className="question-divider" />
             </div>
           ))}
+
+          {isAnswersChecked && (
+            <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
+              <p>You scored {score} our of 5 correct answers</p>
+            </div>
+          )}
 
           <div className="button-container">
             <div className="top-button-container">
