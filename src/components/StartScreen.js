@@ -34,13 +34,17 @@ export default function StartScreen() {
   }
 
   function shuffle(a, b) {
-    let c = [a]
+    // let c = [a]
+    let c = a
     b.push(c)
     for (let i = b.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[b[i], b[j]] = [b[j], b[i]]
     }
-    return b
+    const oldArr = b
+    const newArr = [...new Set(oldArr)]
+    console.log(newArr)
+    return newArr
   }
 
   function getUniqueKey(string) {
@@ -71,12 +75,10 @@ export default function StartScreen() {
         <div className="questions-container">
           <img src={lemonBlob} alt="" className="yellow-blob" />
           <img src={babyBlueBlob} alt="" className="blue-blob" />
-
           <h1 className="title">{questions.results[0].category} Questions</h1>
           {questions.results.map((question, index) => (
             <div key={`question-container-${index}`} id={`question-container-${index}`}>
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
-
               <fieldset>
                 <legend className="sr-only">Quiz question</legend>
                 {shuffle(question.correct_answer, question.incorrect_answers).map((answer, index) => (
