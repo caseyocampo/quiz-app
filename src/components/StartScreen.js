@@ -127,7 +127,7 @@ export default function StartScreen() {
                           isAnswersChecked &&
                           (decode(question.correct_answer) == decode(answer)
                             ? 'correct-answer selected'
-                            : 'selected-wrong-answer')
+                            : 'selected-wrong-answer incorrect-answer')
                         }
                         ${isAnswersChecked && 'incorrect-answer'}
                             `}
