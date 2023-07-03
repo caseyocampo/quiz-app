@@ -130,7 +130,8 @@ button {
 }
 
 @media (max-width: 945px) {
-  h1 {
+  h1,
+  .title {
     font-size: 2.5rem;
   }
 
