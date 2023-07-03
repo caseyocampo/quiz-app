@@ -33,7 +33,7 @@ export default function StartScreen() {
 
   function handleReturnToStartPage() {
     setIsStartScreen((prev) => !prev)
-    setIsAnswersChecked((prev) => !prev)
+    setIsAnswersChecked(false)
   }
 
   function getUniqueKey(string) {
