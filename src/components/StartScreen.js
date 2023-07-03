@@ -5,9 +5,7 @@ import babyBlueBlob from '../assets/images/baby_blue_blob.svg'
 import { decode } from 'html-entities'
 
 export default function StartScreen() {
-  const [isStartScreen, setIsStartScreen] = useState(() => {
-    return false
-  })
+  const [isStartScreen, setIsStartScreen] = useState(false)
 
   const [questions, setQuestions] = useState({
     question: '',
@@ -16,9 +14,7 @@ export default function StartScreen() {
     category: '',
   })
 
-  const [isAnswersChecked, setIsAnswersChecked] = useState(() => {
-    return false
-  })
+  const [isAnswersChecked, setIsAnswersChecked] = useState(false)
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
@@ -35,23 +31,15 @@ export default function StartScreen() {
     setIsStartScreen((prev) => !prev)
   }
 
+  function getUniqueKey(string) {
+    string = string.replace(/\s+/g, '')
+    return string
+  }
+
   function handleCheckAnswers() {
     setIsAnswersChecked((prev) => !prev)
   }
 
-  let newArr = function shuffle(a, b) {
-    let c = a
-    b.push(c)
-    for (let i = b.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[b[i], b[j]] = [b[j], b[i]]
-    }
-    const oldArr = b
-    const newArr = [...new Set(oldArr)]
-    return newArr
-  }
-
-  //   let newArr = []
   function shuffle(a, b) {
     let c = a
     b.push(c)
@@ -98,30 +86,31 @@ export default function StartScreen() {
               <h2 key={`question-${index}`}>{decode(question.question)}</h2>
               <fieldset>
                 <legend className="sr-only">Quiz question</legend>
-                {shuffle(question.correct_answer, question.incorrect_answers).map((answer, index) => (
-                  // {(newArr = shuffle(question.correct_answer, question.incorrect_answers))}
-                  <span
-                    style={{ display: 'inline-block' }}
-                    key={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}
-                    id={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}
-                  >
-                    <input
-                      type="radio"
-                      id={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
-                      name={`${getUniqueKey(decode(question.correct_answer))}`}
-                      value={decode(question.correct_answer)}
-                    />
-                    <label
-                      htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
-                      className={`button ${
-                        isAnswersChecked &&
-                        (decode(question.correct_answer) == decode(answer) ? 'correct-answer' : 'incorrect-answer')
-                      }`}
+                {shuffle(question.correct_answer, question.incorrect_answers)
+                  .sort()
+                  .map((answer, index) => (
+                    <span
+                      style={{ display: 'inline-block' }}
+                      key={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}
+                      id={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}
                     >
-                      {decode(answer)}
-                    </label>
-                  </span>
-                ))}
+                      <input
+                        type="radio"
+                        id={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
+                        name={`${getUniqueKey(decode(question.correct_answer))}`}
+                        value={decode(question.correct_answer)}
+                      />
+                      <label
+                        htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
+                        className={`button ${
+                          isAnswersChecked &&
+                          (decode(question.correct_answer) == decode(answer) ? 'correct-answer' : 'incorrect-answer')
+                        }`}
+                      >
+                        {decode(answer)}
+                      </label>
+                    </span>
+                  ))}
               </fieldset>
               <hr className="question-divider" />
             </div>
