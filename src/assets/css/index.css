@@ -26,9 +26,12 @@ body {
 body {
   background: var(--bg);
   margin: 0;
-  padding: 1em 2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  padding: 1em 2em;
 }
 
 code {

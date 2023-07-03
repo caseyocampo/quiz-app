@@ -20,9 +20,14 @@
 }
 
 .button-container {
-  display: inline-flex;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   margin-top: 5em;
+}
+
+.top-button-container {
+  display: flex;
+  margin: 0 2em 2em 2em;
   width: 100%;
 }
 
@@ -48,6 +53,10 @@ button:hover {
   font-size: 2rem;
   margin-right: 1em;
   padding: 0.75em 2.5em;
+}
+
+.bottom-button {
+  margin: 0 1em;
 }
 
 .button-text {
@@ -125,21 +134,29 @@ button {
     font-size: 2.5rem;
   }
 
-  .button-primary {
-    margin-bottom: 3em;
-  }
-
   .button-container {
     flex-direction: column;
-    gap: 1em;
   }
 
-  .button-container > button {
+  .top-button-container {
+    flex-direction: column;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .button-container > button,
+  .top-button-container > button {
     font-size: 1.5rem;
   }
 
   .button-secondary {
     margin-right: 0;
+    margin-bottom: 1em;
+  }
+
+  .bottom-button {
+    margin: 0;
+    margin-top: 1em;
   }
 
   fieldset {

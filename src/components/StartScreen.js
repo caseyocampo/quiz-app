@@ -15,6 +15,7 @@ export default function StartScreen() {
   })
 
   const [isAnswersChecked, setIsAnswersChecked] = useState(false)
+  const [isNewQuestion, setIsNewQuestions] = useState(false)
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
@@ -25,7 +26,7 @@ export default function StartScreen() {
         }
         return { errorCode: data.status }
       })
-  }, [])
+  }, [isNewQuestion])
 
   function handleClick() {
     setIsStartScreen((prev) => !prev)
@@ -36,13 +37,18 @@ export default function StartScreen() {
     setIsAnswersChecked(false)
   }
 
+  function handleCheckAnswers() {
+    setIsAnswersChecked((prev) => !prev)
+  }
+
+  function handleNewQuestions() {
+    setIsNewQuestions((prev) => !prev)
+    setIsAnswersChecked(false)
+  }
+
   function getUniqueKey(string) {
     string = string.replace(/\s+/g, '')
     return string
-  }
-
-  function handleCheckAnswers() {
-    setIsAnswersChecked((prev) => !prev)
   }
 
   function shuffle(a, b) {
@@ -126,12 +132,17 @@ export default function StartScreen() {
           ))}
 
           <div className="button-container">
-            <button className="button-secondary" onClick={handleReturnToStartPage}>
-              Back to start page
-            </button>
+            <div className="top-button-container">
+              <button className="button-secondary" onClick={handleReturnToStartPage}>
+                Back to start page
+              </button>
 
-            <button className="button-primary" onClick={handleCheckAnswers}>
-              Check answers
+              <button className="button-primary" onClick={handleCheckAnswers}>
+                Check answers
+              </button>
+            </div>
+            <button className="button-secondary bottom-button" onClick={handleNewQuestions}>
+              Load new questions
             </button>
           </div>
         </div>
