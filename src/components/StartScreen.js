@@ -5,14 +5,20 @@ import babyBlueBlob from '../assets/images/baby_blue_blob.svg'
 import { decode } from 'html-entities'
 
 export default function StartScreen() {
-  const [isStartScreen, setIsStartScreen] = useState(false)
+  const [isStartScreen, setIsStartScreen] = useState(() => {
+    return false
+  })
+
   const [questions, setQuestions] = useState({
     question: '',
     correct_answer: '',
     incorrect_answers: '',
     category: '',
   })
-  const [isAnswersChecked, setIsAnswersChecked] = useState(false)
+
+  const [isAnswersChecked, setIsAnswersChecked] = useState(() => {
+    return false
+  })
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
@@ -33,8 +39,7 @@ export default function StartScreen() {
     setIsAnswersChecked((prev) => !prev)
   }
 
-  function shuffle(a, b) {
-    // let c = [a]
+  let newArr = function shuffle(a, b) {
     let c = a
     b.push(c)
     for (let i = b.length - 1; i > 0; i--) {
@@ -43,7 +48,19 @@ export default function StartScreen() {
     }
     const oldArr = b
     const newArr = [...new Set(oldArr)]
-    console.log(newArr)
+    return newArr
+  }
+
+  //   let newArr = []
+  function shuffle(a, b) {
+    let c = a
+    b.push(c)
+    for (let i = b.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[b[i], b[j]] = [b[j], b[i]]
+    }
+    const oldArr = b
+    const newArr = [...new Set(oldArr)]
     return newArr
   }
 
@@ -61,9 +78,9 @@ export default function StartScreen() {
           <div className="start-page">
             <h1>Quizzical - a Solo Scrimba Project</h1>
             <p style={{ maxWidth: '500px', textAlign: 'left' }}>
-              To continue my <a href="https://scrimba.com/learn/frontend">React</a> education, I've joined the Scrimba
-              Front End Development Career Path. We were given a Figma file and set of instructions to complete this
-              project. This is the finished project. Enjoy!
+              To continue my React education, I've joined the{' '}
+              <a href="https://scrimba.com/learn/frontend">Scrimba Front End Development Career Path</a>. We were given
+              a Figma file and set of instructions to complete this project. This is the finished project. Enjoy!
             </p>
             <button className="button-primary" onClick={handleClick}>
               Start quiz
@@ -82,6 +99,7 @@ export default function StartScreen() {
               <fieldset>
                 <legend className="sr-only">Quiz question</legend>
                 {shuffle(question.correct_answer, question.incorrect_answers).map((answer, index) => (
+                  // {(newArr = shuffle(question.correct_answer, question.incorrect_answers))}
                   <span
                     style={{ display: 'inline-block' }}
                     key={`${getUniqueKey(decode(question.correct_answer))}-fieldset-${index}`}

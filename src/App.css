@@ -141,4 +141,9 @@ button {
   .button-secondary {
     margin-right: 0;
   }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+  }
 }
