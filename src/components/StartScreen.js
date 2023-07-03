@@ -31,6 +31,11 @@ export default function StartScreen() {
     setIsStartScreen((prev) => !prev)
   }
 
+  function handleReturnToStartPage() {
+    setIsStartScreen((prev) => !prev)
+    setIsAnswersChecked((prev) => !prev)
+  }
+
   function getUniqueKey(string) {
     string = string.replace(/\s+/g, '')
     return string
@@ -104,8 +109,12 @@ export default function StartScreen() {
                         htmlFor={`${getUniqueKey(decode(question.correct_answer))}-${index}`}
                         className={`button ${
                           isAnswersChecked &&
-                          (decode(question.correct_answer) == decode(answer) ? 'correct-answer' : 'incorrect-answer')
-                        }`}
+                          (decode(question.correct_answer) == decode(answer)
+                            ? 'correct-answer'
+                            : 'selected-wrong-answer')
+                        }
+                            ${isAnswersChecked && 'incorrect-answer'}
+                            `}
                       >
                         {decode(answer)}
                       </label>
@@ -117,7 +126,7 @@ export default function StartScreen() {
           ))}
 
           <div className="button-container">
-            <button className="button-secondary" onClick={handleClick}>
+            <button className="button-secondary" onClick={handleReturnToStartPage}>
               Back to start page
             </button>
 
