@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useRef, useLayoutEffect } from 'react'
 import '../assets/css/index.css'
 import lemonBlob from '../assets/images/lemon_blob.svg'
 import babyBlueBlob from '../assets/images/baby_blue_blob.svg'
@@ -79,6 +79,16 @@ export default function StartScreen() {
     const firstFocusable = focusable[0]
     isStartScreen && firstFocusable.focus()
   }, [isStartScreen])
+
+  const firstUpdate = useRef(true)
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+      return
+    }
+
+    console.log('componentDidUpdateFunction')
+  })
 
   return (
     <section>
