@@ -155,7 +155,8 @@ button {
   }
 
   .button-container > button,
-  .top-button-container > button {
+  .top-button-container > button,
+  .button-primary {
     font-size: 1.5rem;
   }
 
