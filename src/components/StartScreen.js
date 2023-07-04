@@ -17,6 +17,7 @@ export default function StartScreen() {
   const [isAnswersChecked, setIsAnswersChecked] = useState('')
   const [isNewQuestion, setIsNewQuestions] = useState(false)
   const [score, setScore] = useState(0)
+  const [isAlreadyRendered, setIsAlreadyRendered] = useState(false)
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
@@ -36,6 +37,7 @@ export default function StartScreen() {
   function handleReturnToStartPage() {
     setIsStartScreen((prev) => !prev)
     setIsAnswersChecked(false)
+    setIsAlreadyRendered((prev) => !prev)
   }
 
   function handleCheckAnswers() {
@@ -80,17 +82,12 @@ export default function StartScreen() {
     isStartScreen && firstFocusable.focus()
   }, [isStartScreen])
 
-  const firstUpdate = useRef(true)
-  useLayoutEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false
-      console.log('test')
-
-      return
-    }
-
-    console.log('componentDidUpdateFunction')
-  })
+  useEffect(() => {
+    const content = document.getElementById('main')
+    const focusable = content.querySelectorAll('button, [href], input, [tabindex="0"]')
+    const firstFocusable = focusable[0]
+    isAlreadyRendered && firstFocusable.focus()
+  }, [isAlreadyRendered])
 
   return (
     <section>
@@ -119,7 +116,6 @@ export default function StartScreen() {
           {questions.results.map((question, index) => (
             <div key={`question-container-${index}`} id={`question-container-${index}`}>
               <fieldset>
-                {/* <legend className="sr-only">Quiz question {index + 1}</legend> */}
                 <legend>
                   <h2 key={`question-${index}`}>
                     <span className="sr-only">Quiz question {index + 1}</span>
