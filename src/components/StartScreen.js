@@ -73,10 +73,12 @@ export default function StartScreen() {
     return newArr
   }
 
-  function getUniqueKey(string) {
-    string = string.replace(/\s+/g, '')
-    return string
-  }
+  useEffect(() => {
+    const content = document.getElementById('main')
+    const focusable = content.querySelectorAll('button, [href], input, [tabindex="0"]')
+    const firstFocusable = focusable[0]
+    isStartScreen && firstFocusable.focus()
+  }, [isStartScreen])
 
   return (
     <section>
@@ -104,9 +106,15 @@ export default function StartScreen() {
           <h1 className="title">{questions.results[0].category} Questions</h1>
           {questions.results.map((question, index) => (
             <div key={`question-container-${index}`} id={`question-container-${index}`}>
-              <h2 key={`question-${index}`}>{decode(question.question)}</h2>
               <fieldset>
-                <legend className="sr-only">Quiz question</legend>
+                {/* <legend className="sr-only">Quiz question {index + 1}</legend> */}
+                <legend>
+                  <h2 key={`question-${index}`}>
+                    <span className="sr-only">Quiz question {index + 1}</span>
+                    {decode(question.question)}
+                  </h2>
+                </legend>
+
                 {shuffle(question.correct_answer, question.incorrect_answers)
                   .sort()
                   .map((answer, index) => (
@@ -141,11 +149,13 @@ export default function StartScreen() {
             </div>
           ))}
 
-          {isAnswersChecked && (
-            <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
-              <p>You scored {score} out of 5 correct answers</p>
-            </div>
-          )}
+          <section aria-live="polite">
+            {isAnswersChecked && (
+              <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
+                <p>You scored {score} out of 5 correct answers</p>
+              </div>
+            )}
+          </section>
 
           <div className="button-container">
             <div className="top-button-container">

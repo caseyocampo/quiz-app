@@ -1,9 +1,9 @@
-import "./App.css"
-import StartScreen from "./components/StartScreen"
+import './App.css'
+import StartScreen from './components/StartScreen'
 
 function App(props) {
   return (
-    <main>
+    <main id="main">
       <StartScreen />
     </main>
   )
