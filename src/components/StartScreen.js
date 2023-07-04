@@ -84,6 +84,8 @@ export default function StartScreen() {
   useLayoutEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false
+      console.log('test')
+
       return
     }
 
