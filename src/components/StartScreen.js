@@ -32,6 +32,7 @@ export default function StartScreen() {
 
   function handleClick() {
     setIsStartScreen((prev) => !prev)
+    setIsAlreadyRendered(false)
   }
 
   function handleReturnToStartPage() {
