@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef, useLayoutEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import '../assets/css/index.css'
 import lemonBlob from '../assets/images/lemon_blob.svg'
 import babyBlueBlob from '../assets/images/baby_blue_blob.svg'
@@ -14,10 +14,13 @@ export default function StartScreen() {
     category: '',
   })
 
+  //   const [errorMessage, setErrorMessage] = useState('')
+  //   const [isQuizComplete, setIsQuizComplete] = useState(false)
   const [isAnswersChecked, setIsAnswersChecked] = useState('')
   const [isNewQuestion, setIsNewQuestions] = useState(false)
   const [score, setScore] = useState(0)
   const [isAlreadyRendered, setIsAlreadyRendered] = useState(false)
+  const [isErrorMessage, setIsErrorMessage] = useState(false)
 
   useEffect(() => {
     fetch('https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple')
@@ -39,24 +42,39 @@ export default function StartScreen() {
     setIsStartScreen((prev) => !prev)
     setIsAnswersChecked(false)
     setIsAlreadyRendered((prev) => !prev)
+    setIsErrorMessage(false)
   }
 
   function handleCheckAnswers() {
     setIsAnswersChecked((prev) => !prev)
+    const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked').length
+    if (selectedAnswers === 5) {
+      setIsErrorMessage(false)
+    }
   }
 
   function handleNewQuestions() {
     setIsNewQuestions((prev) => !prev)
     setIsAnswersChecked(false)
+    setIsErrorMessage(false)
   }
 
   useEffect(() => {
+    const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked').length
     const correctAnswers = document.querySelectorAll('.button.correct-answer.selected.incorrect-answer').length
-    const selectedIncorrectrectAnswers = document.querySelectorAll(
+    const selectedIncorrectAnswers = document.querySelectorAll(
       'input[type="radio"]:checked + label.selected-wrong-answer'
     ).length
-    const totalScore = correctAnswers - selectedIncorrectrectAnswers
-    setScore(totalScore)
+    const totalScore = correctAnswers - selectedIncorrectAnswers
+    // if (selectedAnswers.length !== 5) {
+    //   setErrorMessage('You must answer all 5 questions.')
+    // }
+    if (isAnswersChecked && selectedAnswers < 5) {
+      setScore(0)
+      setIsErrorMessage(true)
+    } else {
+      setScore(totalScore)
+    }
   }, [isAnswersChecked])
 
   function getUniqueKey(string) {
@@ -147,6 +165,7 @@ export default function StartScreen() {
                             : 'selected-wrong-answer incorrect-answer')
                         }
                         ${isAnswersChecked && 'incorrect-answer'}
+                        ${isErrorMessage && 'incorrect-answer-override'}
                             `}
                       >
                         {decode(answer)}
@@ -158,10 +177,22 @@ export default function StartScreen() {
             </div>
           ))}
 
+          {/* {isAnswersChecked && errorMessage} */}
           <section aria-live="polite">
             {isAnswersChecked && (
-              <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
+              <div
+                style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}
+                className={isErrorMessage ? 'hidden' : ''}
+              >
                 <p>You scored {score} out of 5 correct answers</p>
+              </div>
+            )}
+          </section>
+
+          <section aria-live="polite">
+            {isErrorMessage && (
+              <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
+                <p>Please complete the quiz to calculate score.</p>
               </div>
             )}
           </section>

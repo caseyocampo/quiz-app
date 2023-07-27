@@ -31,6 +31,10 @@
   width: 100%;
 }
 
+.hidden {
+  display: none;
+}
+
 button:hover {
   cursor: pointer;
   text-decoration: underline;
@@ -102,6 +106,11 @@ input[type='radio']:checked + label.selected-wrong-answer {
 label.incorrect-answer {
   background: var(--bg);
   border: 1.5px solid var(--blueLight);
+}
+
+label.incorrect-answer-override {
+  background: var(--bg) !important;
+  border: 1.5px solid var(--blueLight) !important;
 }
 
 input[type='radio']:checked + label {

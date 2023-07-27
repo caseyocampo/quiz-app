@@ -1,6 +1,6 @@
 # Quiz App Solo Project for Scrimba
 
-Run project: `npm start`
+Run project: `npm start` or `yarn start`
 
 A React solo project from [Scrimba's Frontend Developer Career Path](https://scrimba.com/learn/frontend).
 
