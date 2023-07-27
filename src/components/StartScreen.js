@@ -65,12 +65,14 @@ export default function StartScreen() {
     const selectedIncorrectAnswers = document.querySelectorAll(
       'input[type="radio"]:checked + label.selected-wrong-answer'
     ).length
-    const totalScore = correctAnswers - selectedIncorrectAnswers
+    const numberOfCorrectAnswers = document.querySelectorAll(
+      'input[type="radio"]:checked + label.correct-answer.selected'
+    ).length
     if (isAnswersChecked && selectedAnswers < 5) {
       setScore(0)
       setIsErrorMessage(true)
     } else {
-      setScore(totalScore)
+      setScore(numberOfCorrectAnswers)
     }
   }, [isAnswersChecked])
 
@@ -161,8 +163,6 @@ export default function StartScreen() {
                             ? 'correct-answer selected'
                             : 'selected-wrong-answer incorrect-answer')
                         }
-                        ${isAnswersChecked && 'incorrect-answer'}
-                        ${isErrorMessage && 'incorrect-answer-override'}
                             `}
                       >
                         {decode(answer)}
