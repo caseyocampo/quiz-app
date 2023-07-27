@@ -14,8 +14,6 @@ export default function StartScreen() {
     category: '',
   })
 
-  //   const [errorMessage, setErrorMessage] = useState('')
-  //   const [isQuizComplete, setIsQuizComplete] = useState(false)
   const [isAnswersChecked, setIsAnswersChecked] = useState('')
   const [isNewQuestion, setIsNewQuestions] = useState(false)
   const [score, setScore] = useState(0)
@@ -46,10 +44,12 @@ export default function StartScreen() {
   }
 
   function handleCheckAnswers() {
-    setIsAnswersChecked((prev) => !prev)
     const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked').length
     if (selectedAnswers === 5) {
+      setIsAnswersChecked((prev) => !prev)
       setIsErrorMessage(false)
+    } else {
+      setIsErrorMessage(true)
     }
   }
 
@@ -66,9 +66,6 @@ export default function StartScreen() {
       'input[type="radio"]:checked + label.selected-wrong-answer'
     ).length
     const totalScore = correctAnswers - selectedIncorrectAnswers
-    // if (selectedAnswers.length !== 5) {
-    //   setErrorMessage('You must answer all 5 questions.')
-    // }
     if (isAnswersChecked && selectedAnswers < 5) {
       setScore(0)
       setIsErrorMessage(true)
@@ -177,7 +174,6 @@ export default function StartScreen() {
             </div>
           ))}
 
-          {/* {isAnswersChecked && errorMessage} */}
           <section aria-live="polite">
             {isAnswersChecked && (
               <div
