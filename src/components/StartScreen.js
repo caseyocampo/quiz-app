@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react'
-import '../assets/css/index.css'
-import lemonBlob from '../assets/images/lemon_blob.svg'
-import babyBlueBlob from '../assets/images/baby_blue_blob.svg'
 import { decode } from 'html-entities'
+import Homepage from './Homepage'
+import Buttons from './Buttons'
+import '../assets/css/index.css'
 
 export default function StartScreen() {
   const [isStartScreen, setIsStartScreen] = useState(false)
@@ -61,10 +61,6 @@ export default function StartScreen() {
 
   useEffect(() => {
     const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked').length
-    // const correctAnswers = document.querySelectorAll('.button.correct-answer.selected.incorrect-answer').length
-    // const selectedIncorrectAnswers = document.querySelectorAll(
-    //   'input[type="radio"]:checked + label.selected-wrong-answer'
-    // ).length
     const numberOfCorrectAnswers = document.querySelectorAll(
       'input[type="radio"]:checked + label.correct-answer.selected'
     ).length
@@ -88,9 +84,9 @@ export default function StartScreen() {
       const j = Math.floor(Math.random() * (i + 1))
       ;[b[i], b[j]] = [b[j], b[i]]
     }
-    const oldArr = b
-    const newArr = [...new Set(oldArr)]
-    return newArr
+    const unshuffledAnswers = b
+    const shuffledAnswers = [...new Set(unshuffledAnswers)]
+    return shuffledAnswers
   }
 
   useEffect(() => {
@@ -109,27 +105,9 @@ export default function StartScreen() {
 
   return (
     <section>
-      {!isStartScreen && (
-        <div>
-          <img src={lemonBlob} alt="" className="blob yellow-blob" />
-          <img src={babyBlueBlob} alt="" className="blob blue-blob" />
-          <div className="start-page">
-            <h1>Quizzical - a Solo Scrimba Project</h1>
-            <p style={{ maxWidth: '500px', textAlign: 'left' }}>
-              To continue my React education, I've joined the{' '}
-              <a href="https://scrimba.com/learn/frontend">Scrimba Front End Development Career Path</a>. We were given
-              a Figma file and list of instructions to complete this assignment. This is the finished project. Enjoy!
-            </p>
-            <button className="button-primary" onClick={handleClick}>
-              Start quiz
-            </button>
-          </div>
-        </div>
-      )}
+      {!isStartScreen && <Homepage handleClick={handleClick} />}
       {isStartScreen && (
         <div className="questions-container">
-          <img src={lemonBlob} alt="" className="yellow-blob" />
-          <img src={babyBlueBlob} alt="" className="blue-blob" />
           <h1 className="title">{questions.results[0].category} Questions</h1>
           {questions.results.map((question, index) => (
             <div key={`question-container-${index}`} id={`question-container-${index}`}>
@@ -173,7 +151,6 @@ export default function StartScreen() {
               <hr className="question-divider" />
             </div>
           ))}
-
           <section aria-live="polite">
             {isAnswersChecked && (
               <div
@@ -189,20 +166,11 @@ export default function StartScreen() {
               </div>
             )}
           </section>
-
-          <div className="button-container">
-            <div className="top-button-container">
-              <button className="button-primary" onClick={handleCheckAnswers}>
-                Check answers
-              </button>
-              <button className="button-secondary" onClick={handleReturnToStartPage}>
-                Back to start page
-              </button>
-            </div>
-            <button className="button-secondary bottom-button" onClick={handleNewQuestions}>
-              Load new questions
-            </button>
-          </div>
+          <Buttons
+            handleCheckAnswers={handleCheckAnswers}
+            handleReturnToStartPage={handleReturnToStartPage}
+            handleNewQuestions={handleNewQuestions}
+          />
         </div>
       )}
     </section>
