@@ -61,10 +61,10 @@ export default function StartScreen() {
 
   useEffect(() => {
     const selectedAnswers = document.querySelectorAll('input[type="radio"]:checked').length
-    const correctAnswers = document.querySelectorAll('.button.correct-answer.selected.incorrect-answer').length
-    const selectedIncorrectAnswers = document.querySelectorAll(
-      'input[type="radio"]:checked + label.selected-wrong-answer'
-    ).length
+    // const correctAnswers = document.querySelectorAll('.button.correct-answer.selected.incorrect-answer').length
+    // const selectedIncorrectAnswers = document.querySelectorAll(
+    //   'input[type="radio"]:checked + label.selected-wrong-answer'
+    // ).length
     const numberOfCorrectAnswers = document.querySelectorAll(
       'input[type="radio"]:checked + label.correct-answer.selected'
     ).length
@@ -183,9 +183,6 @@ export default function StartScreen() {
                 <p>You scored {score} out of 5 correct answers</p>
               </div>
             )}
-          </section>
-
-          <section aria-live="polite">
             {isErrorMessage && (
               <div style={{ textAlign: 'center', fontWeight: '700', fontSize: '1.5rem' }}>
                 <p>Please complete the quiz to calculate score.</p>
