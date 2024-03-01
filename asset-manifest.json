@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/quiz-app/static/css/main.1572219e.css",
+    "main.js": "/quiz-app/static/js/main.d75ac3a8.js",
+    "index.html": "/quiz-app/index.html",
+    "static/media/baby_blue_blob.svg": "/quiz-app/static/media/baby_blue_blob.5a0801127e1ec77c80b57fb7ab867cd6.svg",
+    "static/media/lemon_blob.svg": "/quiz-app/static/media/lemon_blob.24e8bcad6e43342206d175e44da2f427.svg",
+    "main.1572219e.css.map": "/quiz-app/static/css/main.1572219e.css.map",
+    "main.d75ac3a8.js.map": "/quiz-app/static/js/main.d75ac3a8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1572219e.css",
+    "static/js/main.d75ac3a8.js"
+  ]
+}
