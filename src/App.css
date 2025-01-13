@@ -10,6 +10,10 @@
   left: 0;
 }
 
+.homepage-instructions {
+  max-width: 500px;
+}
+
 .start-page {
   align-items: center;
   display: flex;
